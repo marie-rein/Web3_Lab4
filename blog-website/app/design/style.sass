@@ -1,0 +1,104 @@
+
+$fontTile: "Lora", serif
+$taille : 18px
+$weight : bold
+
+#title
+     font-family: $fontTile
+     font-weight: $weight
+     font-size: 40px
+     font-style: normal
+     text-align: center
+p
+     font-family: "Open-Sans", sans-serif
+     font-style: normal
+     font-size: $taille
+
+.card:hover
+        transform: scale(1.1)
+        transition: 0.3s
+
+.card
+    cursor: pointer
+    width: 20rem
+    margin-bottom: 40px
+    text-decoration: none
+
+.card-title
+    background-color: #393E46
+    color: white
+    padding: 0.5rem
+    border-radius: 0.5rem
+    text-align: left
+    font-family: $fontTile
+
+#formulaire
+    background-color: #393E46
+    color: white
+    max-width: 50%
+    height: auto
+
+    
+
+@mixin navClass
+        font-family: $fontTile
+        font-size: $taille
+        font-weight: $weight
+       
+label
+    @include navClass
+
+.navbar-nav
+    @include navClass
+    color: white  
+    // overflow: hidden
+    // position: fixed
+    top: 0
+    width: 100%     
+
+ul
+    width: 100%
+
+
+.envoyer
+    float: right
+    margin-top: 20px
+    margin-bottom: 50px
+
+.pagination 
+    text-align: center
+    margin-top: 2rem
+
+  
+.pagination a 
+    color: #4c5661 
+    padding: 8px 16px
+    text-decoration: none
+    border: 1px solid #57626d 
+    margin: 0 5px
+    border-radius: 4px
+
+  
+.pagination a:hover  
+    background-color: #4b535b 
+    color: white
+
+  
+.pagination .active  
+    background-color: #007BFF
+    color: white
+ 
+#imageBlog
+    width: 50%
+    height: 300px
+
+#contenu2
+    margin-bottom: 30px
+    max-width: 100%
+
+#contenu3
+    margin-bottom: 40px
+    
+#caption
+    width: 20%
+    height: 140px
