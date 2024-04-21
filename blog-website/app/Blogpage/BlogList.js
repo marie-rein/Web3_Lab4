@@ -1,17 +1,18 @@
-"use client";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import BlogCard from "./BlogCard";
+ "use client";
 
-import React from 'react';
+import { useState, useEffect } from 'react';
+import BlogCard from "./BlogCard";
+import { initPublications, getPublications } from '../indexeddb';
 
 function BlogList() {
     const [currentPage, setCurrentPage] = useState(1);
     const cardsPerPage = 5;
     const [totalPages, setTotalPages] = useState(0);
     const [publications, setPublications] = useState([]);
+    const [loading, setLoading] = useState(true); // État de chargement
 
     useEffect(() => {
+       
         async function fetchData() {
             try {
                 const response = await fetch('http://localhost:3000/publication');
@@ -20,10 +21,29 @@ function BlogList() {
                 }
                 const data = await response.json();
                 setPublications(data);
+                //loop dans les publications pour les sauvegarder dans IndexedDB
+                for (let publication of data) {
+                    if(!publication.id) {
+                        await initPublications([publication]);
+                    }
+                }
+                
+                console.log(data);
                 setTotalPages(Math.ceil(data.length / cardsPerPage));
-                //updatePagination();
+                setLoading(false); // Mettre fin au chargement lorsque les données sont récupérées
             } catch (error) {
                 console.error(error);
+                // Récupérer les publications depuis IndexedDB
+                try {
+                    const pubIndexeddb = await getPublications();
+                    setPublications(pubIndexeddb);
+                   // console.log(pubIndexeddb);
+                    setTotalPages(Math.ceil(pubIndexeddb.length / cardsPerPage));
+                } catch (error) {
+                    console.error("Erreur lors de l'initialisation des publications dans IndexedDB :", error);
+                } finally {
+                    setLoading(false); // Mettre fin au chargement même si une erreur se produit
+                }
             }
         }
         fetchData();
@@ -54,6 +74,10 @@ function BlogList() {
         setCurrentPage(newPage);
     }
 
+    if (loading) {
+        return <div><h1 className='text-center'> Loading...</h1></div>; // Afficher le message de chargement
+    }
+
     return (
         <div className="container">
             <div className="row" id="contenuPublication">
@@ -79,9 +103,4 @@ function BlogList() {
 }
 
 export default BlogList;
-
-
-
-
-
 

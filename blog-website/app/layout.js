@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./design/custom.css";
 import "./design/style.css";
@@ -17,3 +18,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
