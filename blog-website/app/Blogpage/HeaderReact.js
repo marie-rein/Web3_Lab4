@@ -22,7 +22,7 @@ const HeaderReact = () => {
                         <a className="nav-link" href="#">NOS SERVICES</a>
                     </li>
                     <li className="nav-item col-2">
-                        <a className="nav-link" href="../AjouterPublication">AJOUTER PUB</a>
+                        <a className="nav-link" href="">FAQ</a>
                     </li>
                     <li className="nav-item col-2">
                         <a className="nav-link" href="#">BLOG</a>
